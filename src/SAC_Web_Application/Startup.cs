@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using SAC_Web_Application.Data;
 using SAC_Web_Application.Models;
 using SAC_Web_Application.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SAC_Web_Application
 {
@@ -52,10 +53,16 @@ namespace SAC_Web_Application
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.Configure<IdentityOptions>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;
+            });
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
             });
         }
 

@@ -12,6 +12,7 @@ using SAC_Web_Application.Services;
 
 namespace SAC_Web_Application.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class ManageController : Controller
     {
