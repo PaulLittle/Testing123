@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using SAC_Web_Application.Models;
 using SAC_Web_Application.Models.AccountViewModels;
 using SAC_Web_Application.Services;
+using SAC_Web_Application.Models.ClubModel;
 
 namespace SAC_Web_Application.Controllers
 {
@@ -74,7 +75,9 @@ namespace SAC_Web_Application.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    // redirect user to subscriptions page for now
+                    return RedirectToAction(nameof(Subscriptions));
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -90,6 +93,35 @@ namespace SAC_Web_Application.Controllers
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View(model);
                 }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        // GET: /Account/Subscriptions
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Subscriptions(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        // POST: /Account/Subscriptions
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult Subscriptions(SubscriptionsViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var member = new Members { FirstName = model.FirstName, LastName = model.Surname, DOB = model.DateOfBirth, Gender = model.Gender,
+                    Address1 = model.Address1, Address2 = model.Address2, County = model.County, Province = model.Province, PhoneNumber = model.PhoneNumber,
+                    TeamName = model.TeamName, CountyOfBirth = model.CountyofBirth       
+                };
+
             }
 
             // If we got this far, something failed, redisplay form

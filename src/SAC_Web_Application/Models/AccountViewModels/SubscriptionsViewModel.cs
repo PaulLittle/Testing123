@@ -21,7 +21,7 @@ namespace SAC_Web_Application.Models.AccountViewModels
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -49,15 +49,8 @@ namespace SAC_Web_Application.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "HomePhone")]
-        public string HomePhone { get; set; }
-
-        
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Mobile Number")]
-        public string MobileNumber { get; set; }
+        [Display(Name = "PhoneNumber")]
+        public string PhoneNumber { get; set; }       
 
         [Required]
         [DataType(DataType.Text)]

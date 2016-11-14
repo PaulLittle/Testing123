@@ -14,6 +14,7 @@ using SAC_Web_Application.Models;
 using SAC_Web_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using SAC_Web_Application.Models.ClubModel;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace SAC_Web_Application
 {
@@ -45,7 +46,8 @@ namespace SAC_Web_Application
             services.AddDbContext<ClubContext>(options => options.UseSqlServer(connection));
 
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddEntityFramework()
+            .AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

@@ -13,7 +13,7 @@ namespace SAC_Web_Application.Models.ClubModel
             : base(options)
         { }
         
-        public DbSet<Members> Members { get; set; }
+        //public DbSet<Members> Members { get; set; }
         
     }
 }
