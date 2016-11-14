@@ -13,6 +13,7 @@ using SAC_Web_Application.Data;
 using SAC_Web_Application.Models;
 using SAC_Web_Application.Services;
 using Microsoft.AspNetCore.Mvc;
+using SAC_Web_Application.Models.ClubModel;
 
 namespace SAC_Web_Application
 {
@@ -40,6 +41,9 @@ namespace SAC_Web_Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=tcp:sac-server-object.database.windows.net,1433;Initial Catalog=SAC_database;Persist Security Info=False;User ID=Dave1633;Password=SACpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            services.AddDbContext<ClubContext>(options => options.UseSqlServer(connection));
+
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
