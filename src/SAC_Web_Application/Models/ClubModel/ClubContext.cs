@@ -12,8 +12,7 @@ namespace SAC_Web_Application.Models.ClubModel
         public ClubContext(DbContextOptions<ClubContext> options)
             : base(options)
         { }
-        
-        //public DbSet<Members> Members { get; set; }
-        
+
+        public DbSet<Members> Members { get; set; }
     }
 }

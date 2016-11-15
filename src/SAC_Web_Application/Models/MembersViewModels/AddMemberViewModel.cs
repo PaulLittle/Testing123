@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SAC_Web_Application.Models.AccountViewModels
+namespace SAC_Web_Application.Models.MembersViewModels
 {
-    public class SubscriptionsViewModel
+    public class AddMemberViewModel
     {
         [Required]
         [DataType(DataType.Text)]
@@ -16,12 +16,12 @@ namespace SAC_Web_Application.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Surame")]
-        public string Surname { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DOB { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -30,12 +30,18 @@ namespace SAC_Web_Application.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Address1")]
+        [Display(Name = "Address 1")]
         public string Address1 { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Address2")]
+        [Display(Name = "Address 2")]
         public string Address2 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Post Code")]
+        public string PostCode { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -44,12 +50,17 @@ namespace SAC_Web_Application.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Province")]
         public string Province { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "PhoneNumber")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }       
 
         [Required]
@@ -59,7 +70,7 @@ namespace SAC_Web_Application.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "County of Birth")]
-        public string CountyofBirth { get; set; }
+        [Display(Name = "County Of Birth")]
+        public string CountyOfBirth { get; set; }
     }
 }

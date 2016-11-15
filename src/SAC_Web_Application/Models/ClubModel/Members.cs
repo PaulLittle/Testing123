@@ -32,7 +32,5 @@ namespace SAC_Web_Application.Models.ClubModel
         public string CountyOfBirth { get; set; }
         public string Province { get; set; }
         public bool MembershipPaid { get; set; }
-
-        public virtual ApplicationUser AspNetUsers { get; set; }
     }
 }

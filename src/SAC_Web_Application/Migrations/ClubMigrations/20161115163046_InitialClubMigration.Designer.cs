@@ -8,7 +8,7 @@ using SAC_Web_Application.Models.ClubModel;
 namespace SAC_Web_Application.Migrations.ClubMigrations
 {
     [DbContext(typeof(ClubContext))]
-    [Migration("20161114154121_InitialClubMigration")]
+    [Migration("20161115163046_InitialClubMigration")]
     partial class InitialClubMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
