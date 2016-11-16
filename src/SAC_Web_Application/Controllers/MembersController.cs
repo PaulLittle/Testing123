@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SAC_Web_Application.Models.ClubModel;
+using System.Security.Claims;
 
 namespace SAC_Web_Application.Controllers
 {
@@ -54,8 +55,12 @@ namespace SAC_Web_Application.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")] Members members)
         {
+            // GETS THE EMAI ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
+            var userEmail = User.FindFirstValue(ClaimTypes.Name);
+
             if (ModelState.IsValid)
             {
+                members.Email = userEmail;
                 // addional columns that must be added
                 members.MembershipPaid = false;
                 members.DateRegistered = DateTime.Now;
