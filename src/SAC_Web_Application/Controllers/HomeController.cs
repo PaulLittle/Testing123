@@ -27,6 +27,12 @@ namespace SAC_Web_Application.Controllers
 
             return View();
         }
+        public IActionResult Information()
+        {
+            ViewData["Message"] = "Information page.";
+
+            return View();
+        }
         public IActionResult Subscriptions()
         {
             ViewData["Message"] = "Registration page.";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SAC_Web_Application</title>
+    <title>@ViewData["Title"] - Sligo Athlethics Club</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -31,19 +31,70 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About Us</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Information">Information</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Events">Events</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="jumbotron" style="padding:0em;background-color:#309B4B;">
+            <img src="~/images/logo.png" />
+            <span style="font-size:64px;color:white; padding-left:1em;">Sligo Athletic Club</span>
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2016 - SAC_Web_Application</p>
-        </footer>
+        <div class="jumbotron" style="background-color:#309B4B;color:white; padding:1em">
+            <footer>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="footerFormat">
+                            <p style="font-size:24px;">Information</p>
+                            <a runat="server" asp-controller="Home" asp-action="About" style="color:white;">About Us</a><br>
+                            <a runat="server" href="~/" style="color:white;">News</a><br>
+                            <a runat="server" asp-controller="Home" asp-action="Information" style="color:white;">Information</a><br>
+                            <a runat="server" href="~/" style="color:white;">Gallery</a><br>
+                            <a runat="server" asp-controller="Home" asp-action="Contact" style="color:white;">Contact US</a><br>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footerFormat">
+                            <p style="font-size:24px;">Events</p>
+                            <a runat="server" href="~/" style="color:white;">Results</a><br>
+                            <a runat="server" href="~/" style="color:white;">Register</a><br>
+                            <a runat="server" href="~/" style="color:white;">Login</a><br>
+                            <a runat="server" href="http://www.athleticsireland.ie/" style="color:white;">Athletics Ireland</a><br>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footerFormat">
+                            <p style="font-size:24px;">Useful Information</p>
+                            <a runat="server" href="https://www.facebook.com/SouthSligoAthletic/" style="color:white;">South Sligo AC on </a><br>
+                            <a runat="server" href="https://www.facebook.com/North-Sligo-Athletic-Club-104088472984492/" style="color:white;">North Sligo AC</a><br>
+                            <a runat="server" href="https://www.facebook.com/corranac" style="color:white;">Corran AC</a><br>
+                            <a runat="server" href="https://www.facebook.com/sligoroad.league" style="color:white;">Sligo Road Race League</a><br>
+                            <a runat="server" href="http://www.sligotriathlon.ie/" style="color:white;">Sligo Triathlon Club</a><br>
+                            <a runat="server" href="http://www.warriorsfestival.com/" style="color:white;">Warriors Run</a><br>
+                            <a runat="server" href="http://www.runireland.com/" style="color:white;">Run Ireland</a><br>
+                            <a runat="server" href="http://www.athleticsireland.ie/runzone/irish-runner/" style="color:white;">Irish Runner Magazine</a><br>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <p style="font-size:24px;">Our Sponsors</p>
+                        <img class="img-responsive" src="~/images/Amcor.jpeg" style="width:18em; height:7em;" />
+                        <img class="img-responsive" src="~/images/SligoCU.png" style="width:18em; height:7em;" />
+                    </div>
+                </div>
+
+                <p class="bottom-left" style="font-size:16px; margin-bottom:0.2em; margin-top:1em;">&copy; 2016 Sligo Athletic Club</p>
+            </footer>
+        </div>
+
     </div>
 
     <environment names="Development">
