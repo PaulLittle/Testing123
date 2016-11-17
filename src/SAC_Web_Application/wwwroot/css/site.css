@@ -16,7 +16,10 @@ select,
 textarea {
     max-width: 280px;
 }
-
+.glyphicon {
+    margin-right: 0.3em;
+    padding-right: 0.3em;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
