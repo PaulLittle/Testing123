@@ -39,6 +39,12 @@ namespace SAC_Web_Application.Controllers
 
             return View();
         }
+        public IActionResult Events()
+        {
+            ViewData["Message"] = "This page will be a list of all events members can take part in";
+
+            return View();
+        }
 
         public IActionResult Error()
         {
