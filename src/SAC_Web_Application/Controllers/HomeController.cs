@@ -45,6 +45,12 @@ namespace SAC_Web_Application.Controllers
 
             return View();
         }
+        public IActionResult Gallery()
+        {
+            ViewData["Message"] = "Sligo Athletics Club Photos";
+
+            return View();
+        }
 
         public IActionResult Error()
         {
