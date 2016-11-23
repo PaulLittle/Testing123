@@ -16,20 +16,20 @@ namespace SAC_Web_Application.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Club Committee";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Contact us";
 
             return View();
         }
         public IActionResult Information()
         {
-            ViewData["Message"] = "Information page.";
+            ViewData["Message"] = "Training Information";
 
             return View();
         }
