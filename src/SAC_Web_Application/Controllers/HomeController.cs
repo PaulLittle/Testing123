@@ -51,6 +51,18 @@ namespace SAC_Web_Application.Controllers
 
             return View();
         }
+        public IActionResult Admin()
+        {
+            ViewData["Message"] = "This is the admin login page";
+
+            return View();
+        }
+        public IActionResult EventRegistration()
+        {
+            ViewData["Message"] = "Register for your event here";
+
+            return View();
+        }
 
         public IActionResult Error()
         {
