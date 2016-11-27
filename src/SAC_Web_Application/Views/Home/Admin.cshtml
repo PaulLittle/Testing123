@@ -5,12 +5,17 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>
-
-
-    Coaches list, what cat they couch, availibilty,certs
+<div>
     <br />
-    info emil to people- ddl of catagories basic email tmeplate
+    <a asp-area="" asp-controller="Home" asp-action="Coaches">Coach Management</a>
     <br />
-    list of memebrs and serch box to find member
-</p>
+    <p>Coaches list, what cat they coach, availibilty, certs</p>
+    <br />
+    <a asp-area="" asp-controller="Home" asp-action="GroupEmail">Group Email</a>
+    <br />
+    <p>info email to people- ddl of catagories basic email tmeplate</p>
+    <br />
+    <a asp-area="" asp-controller="Members" asp-action="Index">Members Details</a>    
+    <br />
+    list of memembrs and serch box to find member
+</div>

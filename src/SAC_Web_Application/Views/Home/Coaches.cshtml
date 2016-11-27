@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Coaches";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<label></label>
+<form asp-controller="Home" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-4 control-label" style="color:black; text-align:left">Select the category you want to coach:</label>
+        <div class="col-md-8">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select-- <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Juvenille</a></li>
+                <li><a href="#">Junior</a></li>
+                <li><a href="#">Seniors</a></li>
+            </ul>
+            </div>
+        </div>
+
+    <table class="table table-bordered table-striped table-condensed table-responsive" style="width:70%">
+        <thead>
+            <tr>
+                <th>Coach Name</th>
+                <th>Category Coached</th>
+                <th>Availability</th>
+                <th>Cerfificates</th>
+                <th>Contact Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Joe Bloggs</td>
+                <td>Junior,Juvenille</td>
+                <td>Monday,Tuesday</td>
+                <td>First Aid</td>
+                <td>Yes</td>
+                <td>0875321945</td>
+            </tr>
+            <tr>
+                <td>Mary Smith</td>
+                <td>Seniors</td>
+                <td>Friday,Saturday</td>
+                <td>First Aid</td>
+                <td>Yes</td>
+                <td>0853628716</td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>

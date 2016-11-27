@@ -63,6 +63,18 @@ namespace SAC_Web_Application.Controllers
 
             return View();
         }
+        public IActionResult GroupEmail()
+        {
+            ViewData["Message"] = "Send an email to a group of members";
+
+            return View();
+        }
+        public IActionResult Coaches()
+        {
+            ViewData["Message"] = "List of coaches";
+
+            return View();
+        }
 
         public IActionResult Error()
         {
