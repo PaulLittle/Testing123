@@ -12,25 +12,37 @@ namespace SAC_Web_Application.Models.ClubModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MemberID { get; set; }
-        [ForeignKey("AspNetUsers")]        
+        public int MemberID { get; set; }        
         public string Email { get; set; }
         [Column(TypeName = "date")]
         public DateTime DateRegistered { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         [Column(TypeName = "date")]
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
+        [Required]
         public string Address1 { get; set; }
         public string Address2 { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string County { get; set; }
         public string PostCode { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
-        public string TeamName { get; set; }
+        [Required]
         public string CountyOfBirth { get; set; }
+        [Required]
         public string Province { get; set; }
         public bool MembershipPaid { get; set; }
+        [Required]
+        [ForeignKey("Payments")]
+        public string PaymentID { get; set; }
+
+        //public ICollection<Payment> Payments { get; set; }
     }
 }

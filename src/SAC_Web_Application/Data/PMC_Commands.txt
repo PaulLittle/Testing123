@@ -1,4 +1,4 @@
-﻿Add-Migration -Name "InitialClubMigration" -OutputDir "Data\Migrations\ClubMigrations" -Context "ClubContext"
+﻿Add-Migration -Name "InitialClubMigration" -OutputDir "Data\ClubMigrations" -Context "ClubContext"
 Update-Database -Context "ClubContext"
 
 

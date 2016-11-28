@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SAC_Web_Application.Models.ClubModel;
 
-namespace SAC_Web_Application.Migrations.ClubMigrations
+namespace SAC_Web_Application.Data.ClubMigrations
 {
     [DbContext(typeof(ClubContext))]
-    partial class ClubContextModelSnapshot : ModelSnapshot
+    [Migration("20161128135601_AddPaymentsTBLIncForeignKeyInMembersTBL")]
+    partial class AddPaymentsTBLIncForeignKeyInMembersTBL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -53,8 +54,7 @@ namespace SAC_Web_Application.Migrations.ClubMigrations
 
                     b.Property<bool>("MembershipPaid");
 
-                    b.Property<string>("PaymentID")
-                        .IsRequired();
+                    b.Property<string>("PaymentID");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired();
@@ -65,9 +65,6 @@ namespace SAC_Web_Application.Migrations.ClubMigrations
                         .IsRequired();
 
                     b.HasKey("MemberID");
-
-                    b.HasIndex("PaymentID")
-                        .IsUnique();
 
                     b.ToTable("Member");
                 });
@@ -85,14 +82,6 @@ namespace SAC_Web_Application.Migrations.ClubMigrations
                     b.HasKey("PaymentID");
 
                     b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.Members", b =>
-                {
-                    b.HasOne("SAC_Web_Application.Models.ClubModel.Payment")
-                        .WithOne("Member")
-                        .HasForeignKey("SAC_Web_Application.Models.ClubModel.Members", "PaymentID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

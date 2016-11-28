@@ -14,5 +14,6 @@ namespace SAC_Web_Application.Models.ClubModel
         { }
 
         public DbSet<Members> Members { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }
