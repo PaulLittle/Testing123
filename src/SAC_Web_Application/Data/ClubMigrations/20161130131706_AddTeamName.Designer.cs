@@ -8,8 +8,8 @@ using SAC_Web_Application.Models.ClubModel;
 namespace SAC_Web_Application.Data.ClubMigrations
 {
     [DbContext(typeof(ClubContext))]
-    [Migration("20161128135601_AddPaymentsTBLIncForeignKeyInMembersTBL")]
-    partial class AddPaymentsTBLIncForeignKeyInMembersTBL
+    [Migration("20161130131706_AddTeamName")]
+    partial class AddTeamName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,8 @@ namespace SAC_Web_Application.Data.ClubMigrations
 
                     b.Property<bool>("MembershipPaid");
 
-                    b.Property<string>("PaymentID");
+                    b.Property<string>("PaymentID")
+                        .IsRequired();
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired();
@@ -64,7 +65,12 @@ namespace SAC_Web_Application.Data.ClubMigrations
                     b.Property<string>("Province")
                         .IsRequired();
 
+                    b.Property<string>("TeamName");
+
                     b.HasKey("MemberID");
+
+                    b.HasIndex("PaymentID")
+                        .IsUnique();
 
                     b.ToTable("Member");
                 });
@@ -82,6 +88,14 @@ namespace SAC_Web_Application.Data.ClubMigrations
                     b.HasKey("PaymentID");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.Members", b =>
+                {
+                    b.HasOne("SAC_Web_Application.Models.ClubModel.Payment")
+                        .WithOne("Member")
+                        .HasForeignKey("SAC_Web_Application.Models.ClubModel.Members", "PaymentID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

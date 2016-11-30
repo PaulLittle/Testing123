@@ -64,6 +64,8 @@ namespace SAC_Web_Application.Migrations.ClubMigrations
                     b.Property<string>("Province")
                         .IsRequired();
 
+                    b.Property<string>("TeamName");
+
                     b.HasKey("MemberID");
 
                     b.HasIndex("PaymentID")
