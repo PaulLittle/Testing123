@@ -34,6 +34,7 @@ namespace SAC_Web_Application.Models.ClubModel
         public string PostCode { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        public string TeamName { get; set; }
         [Required]
         public string CountyOfBirth { get; set; }
         [Required]
