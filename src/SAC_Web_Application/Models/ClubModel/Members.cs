@@ -11,7 +11,6 @@ namespace SAC_Web_Application.Models.ClubModel
     public class Members
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MemberID { get; set; }        
         public string Email { get; set; }
         [Column(TypeName = "date")]
@@ -40,10 +39,10 @@ namespace SAC_Web_Application.Models.ClubModel
         [Required]
         public string Province { get; set; }
         public bool MembershipPaid { get; set; }
-        [Required]
-        [ForeignKey("Payments")]
-        public string PaymentID { get; set; }
+        //[Required]
+        //[ForeignKey("Payments")]
+        //public string PaymentID { get; set; }
 
-        //public ICollection<Payment> Payments { get; set; }
+        public List<MemberPayment> MemberPayments { get; set; }
     }
 }

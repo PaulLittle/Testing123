@@ -8,28 +8,14 @@ using SAC_Web_Application.Models.ClubModel;
 namespace SAC_Web_Application.Data.ClubMigrations
 {
     [DbContext(typeof(ClubContext))]
-    partial class ClubContextModelSnapshot : ModelSnapshot
+    [Migration("20161206200637_member_payement_relationship")]
+    partial class member_payement_relationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.MemberPayment", b =>
-                {
-                    b.Property<int>("MemberID");
-
-                    b.Property<string>("PaymentID");
-
-                    b.HasKey("MemberID", "PaymentID");
-
-                    b.HasIndex("MemberID");
-
-                    b.HasIndex("PaymentID");
-
-                    b.ToTable("MemberPayments");
-                });
 
             modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.Members", b =>
                 {
@@ -91,23 +77,22 @@ namespace SAC_Web_Application.Data.ClubMigrations
 
                     b.Property<string>("CreateTime");
 
+                    b.Property<int>("MemberID");
+
                     b.Property<string>("UpdateTime");
 
                     b.HasKey("PaymentID");
 
+                    b.HasIndex("MemberID");
+
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.MemberPayment", b =>
+            modelBuilder.Entity("SAC_Web_Application.Models.ClubModel.Payment", b =>
                 {
                     b.HasOne("SAC_Web_Application.Models.ClubModel.Members", "Member")
-                        .WithMany("MemberPayments")
+                        .WithMany("Payments")
                         .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SAC_Web_Application.Models.ClubModel.Payment", "Payment")
-                        .WithMany("MemberPayments")
-                        .HasForeignKey("PaymentID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

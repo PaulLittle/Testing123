@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace SAC_Web_Application.Models.ClubModel
 {
-    [Table("Payments")]
-    public class Payment
+    [Table("MemberPayments")]
+    public class MemberPayment
     {
-        [Key]
         public string PaymentID { get; set; }
-        public string CreateTime { get; set; }
-        public string UpdateTime { get; set; }
-        public string Amount { get; set; }
+        public Payment Payment { get; set; }
 
-        public List<MemberPayment> MemberPayments { get; set; }
+        public int MemberID { get; set; }
+        public Members Member { get; set; }
     }
 }
