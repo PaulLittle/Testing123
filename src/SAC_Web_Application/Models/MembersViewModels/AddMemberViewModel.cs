@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SAC_Web_Application.Models.MembersViewModels
 {
+    // HELLO WORLD!
     public class AddMemberViewModel
     {
         [Required]
