@@ -3,8 +3,8 @@
     ViewData["Title"] = "Information";
 }
 <asp:Content ContentPlaceHolderID="mainPlaceholder" runat="server">
-    <h1>TRAINING TIMES & VENUES</h1>
-    <br />
+
+    @*<br />
     Weekdays
     <br />
     Juveniles:
@@ -18,6 +18,58 @@
     Tuesdays: IT Sligo Track/GAA Pitch 6pm.
     <br />
     Thursdays: Cleveragh Regional Park 6pm.
-    <br />
-    <p>New members welcome! All abilities catered for.<br /></p>
+    <br />*@
+    
+   
+    <div class="container">
+        <h1>TRAINING TIMES & VENUES</h1>
+        <table class="table table-condensed table-responsive table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Juveniles: IT Sligo Track/Indoor
+                        <br />6 to 7pm
+                    </td>
+                    <td>
+                        Junior: IT Sligo Track
+                        <br />5:15pm
+                    </td>
+                    <td></td>
+                    <td>
+                        Junior: IT Sligo Track
+                        <br />5:15pm
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        Senior: IT Sligo Track/GAA Pitch
+                        <br />6pm
+                    </td>
+                    <td></td>
+                    <td>
+                        Senior: Cleveragh Regional Park
+                        <br />6pm
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <br>
+        <p>New members welcome! All abilities catered for.<br /></p>
+    </div>
 </asp:Content>
