@@ -11,7 +11,7 @@ namespace SAC_Web_Application.Models.ClubModel
     public class Payment
     {
         [Key]
-        public int PaymentID { get; set; }
+        public string PaymentID { get; set; }
         public string CreateTime { get; set; }
         public string UpdateTime { get; set; }
         public string Amount { get; set; }
