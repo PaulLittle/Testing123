@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SAC_Web_Application.Models.ClubModel;
 using System.Security.Claims;
 
+//Members Controller
 namespace SAC_Web_Application.Controllers
 {
     public class MembersController : Controller
