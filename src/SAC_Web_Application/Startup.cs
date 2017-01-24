@@ -15,6 +15,8 @@ using SAC_Web_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using SAC_Web_Application.Models.ClubModel;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace SAC_Web_Application
 {
@@ -75,6 +77,34 @@ namespace SAC_Web_Application
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var dtf = new DateTimeFormatInfo
+            {
+                ShortDatePattern = "dd.MM.yyyy",
+                LongDatePattern = "dd.MM.yyyy HH:mm",
+                ShortTimePattern = "HH:mm",
+                LongTimePattern = "HH:mm"
+            };
+            var supportedCultures = new List<CultureInfo>
+                        {
+                        //new CultureInfo("en-US") { DateTimeFormat = dtf },
+                        //new CultureInfo("en") { DateTimeFormat = dtf },
+                        new CultureInfo("de-DE") { DateTimeFormat = dtf },
+                        new CultureInfo("de") { DateTimeFormat = dtf }
+                        //new CultureInfo("en-US"),
+                        //new CultureInfo("en"),
+                        //new CultureInfo("de-DE"),
+                        //new CultureInfo("de")
+                    };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("de-DE"),
+                // Formatting numbers, dates, etc.
+                SupportedCultures = supportedCultures,
+                // UI strings that we have localized.
+                SupportedUICultures = supportedCultures
+            });
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 

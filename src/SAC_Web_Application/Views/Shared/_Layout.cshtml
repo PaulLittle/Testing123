@@ -36,7 +36,13 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Information"><span class="glyphicon glyphicon-pencil"></span>Information</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Events"><span class="glyphicon glyphicon-calendar"></span>Events</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Gallery"><span class="glyphicon glyphicon-camera"></span>Gallery</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin</a></li>
+
+                    @*@if (User.IsInRole("Admin"))*@
+                    @*{*@
+                        <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin</a></li>
+                    @*}*@
+
+   
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
