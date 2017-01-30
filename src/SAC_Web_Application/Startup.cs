@@ -17,6 +17,7 @@ using SAC_Web_Application.Models.ClubModel;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SAC_Web_Application
 {
@@ -72,39 +73,14 @@ namespace SAC_Web_Application
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
+
+            services.AddAuthentication(
+                opts => opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            var dtf = new DateTimeFormatInfo
-            {
-                ShortDatePattern = "dd.MM.yyyy",
-                LongDatePattern = "dd.MM.yyyy HH:mm",
-                ShortTimePattern = "HH:mm",
-                LongTimePattern = "HH:mm"
-            };
-            var supportedCultures = new List<CultureInfo>
-                        {
-                        //new CultureInfo("en-US") { DateTimeFormat = dtf },
-                        //new CultureInfo("en") { DateTimeFormat = dtf },
-                        new CultureInfo("de-DE") { DateTimeFormat = dtf },
-                        new CultureInfo("de") { DateTimeFormat = dtf }
-                        //new CultureInfo("en-US"),
-                        //new CultureInfo("en"),
-                        //new CultureInfo("de-DE"),
-                        //new CultureInfo("de")
-                    };
-
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("de-DE"),
-                // Formatting numbers, dates, etc.
-                SupportedCultures = supportedCultures,
-                // UI strings that we have localized.
-                SupportedUICultures = supportedCultures
-            });
-
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -124,6 +100,15 @@ namespace SAC_Web_Application
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseCookieAuthentication();
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                ClientId = Configuration["AzureAd:ClientId"],
+                Authority = string.Format(Configuration["AzureAd:AadInstance"], Configuration["AzureAd:TenantId"]),
+                CallbackPath = Configuration["AzureAd:AuthCallback"]
+            });
 
             app.UseMvc(routes =>
             {
