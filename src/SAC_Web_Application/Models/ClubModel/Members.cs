@@ -20,7 +20,6 @@ namespace SAC_Web_Application.Models.ClubModel
         [Required]
         public string LastName { get; set; }
         [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N3}")]
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
         [Required]
