@@ -116,6 +116,9 @@ namespace SAC_Web_Application
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DbContextSeedData.Seed(app);
+
         }
     }
 }

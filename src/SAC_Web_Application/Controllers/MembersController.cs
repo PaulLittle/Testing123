@@ -13,7 +13,7 @@ namespace SAC_Web_Application.Controllers
 {
     public class MembersController : Controller
     {
-        private readonly ClubContext _context;
+        private ClubContext _context;
 
         public MembersController(ClubContext context)
         {
