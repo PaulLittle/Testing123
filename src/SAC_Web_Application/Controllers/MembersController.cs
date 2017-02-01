@@ -75,6 +75,37 @@ namespace SAC_Web_Application.Controllers
             // If we got this far, something failed, redisplay form
             return View(members);
         }
+        public IActionResult _Create2()
+        {
+            return View();
+        }
+
+        // POST: Members/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> _Create2([Bind("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")] Members members)
+        {
+            // GETS THE EMAI ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
+            var userEmail = User.FindFirstValue(ClaimTypes.Name);
+
+            if (ModelState.IsValid)
+            {
+                members.Email = userEmail;
+                // addional columns that must be added
+                members.MembershipPaid = false;
+                members.DateRegistered = DateTime.Now;
+
+                _context.Add(members);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(members);
+        }
 
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)

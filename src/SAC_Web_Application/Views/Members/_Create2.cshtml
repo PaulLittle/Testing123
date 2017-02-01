@@ -1,11 +1,5 @@
-@model SAC_Web_Application.Models.MembersViewModels.AddMemberViewModel
-
-@{
-    ViewData["Title"] = "Subscriptions";
-}
-
-<h2>@ViewData["Title"]</h2>
-
+﻿
+@model SAC_Web_Application.Models.ClubModel.Members
 <form asp-action="Create">
     <div class="form-horizontal">
         @*<h4>Add Member</h4>*@
@@ -74,7 +68,6 @@
             </div>
         </div>
         <!--Commented drop down list for now since nothing gets selected-->
-
         <!--<div class="form-group">
             <label asp-for="County" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -225,11 +218,3 @@
         </div>
     </div>
 </form>
-@Html.ActionLink("Add Another Member", "_Create2", "Members", new { @class = "btn btn-primary "})
-<div>
-    <a asp-action="Index" class="btn btn-xs btn-warning">Member List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
