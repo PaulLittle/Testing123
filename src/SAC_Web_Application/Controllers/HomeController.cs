@@ -76,6 +76,12 @@ namespace SAC_Web_Application.Controllers
             return View();
         }
 
+        public IActionResult SubscriptionSuccessfull()
+        {
+            ViewData["Message"] = "Payment Complete";
+
+            return View();
+        }
         public IActionResult Error()
         {
             return View();
