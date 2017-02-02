@@ -17,6 +17,10 @@ namespace SAC_Web_Application.Models.ClubModel
         public DbSet<Payment> Payments { get; set; }
         public DbSet<MemberPayment> MemberPayments { get; set; }
 
+        public DbSet<Coaches> Coaches { get; set; }
+        public DbSet<Qualifications> Qualifications { get; set; }
+        public DbSet<CoachQualification> CoachQualifications { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region MemberPayemnts link table
@@ -33,6 +37,22 @@ namespace SAC_Web_Application.Models.ClubModel
                 .HasOne(mp => mp.Payment)
                 .WithMany(p => p.MemberPayments)
                 .HasForeignKey(mp => mp.PaymentID);
+
+            #endregion
+            #region Coach Qualifications link table
+
+            modelBuilder.Entity<CoachQualification>()
+                .HasKey(c => new { c.CoachID, c.QualID});
+
+            modelBuilder.Entity<CoachQualification>()
+                .HasOne(cq => cq.coaches)
+                .WithMany(c => c.coachQualifications)
+                .HasForeignKey(cq => cq.CoachID);
+
+            modelBuilder.Entity<CoachQualification>()
+                .HasOne(cq => cq.qualifications)
+                .WithMany(q => q.coachQualifications)
+                .HasForeignKey(cq => cq.QualID);
 
             #endregion
         }
