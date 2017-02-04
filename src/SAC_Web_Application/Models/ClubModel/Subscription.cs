@@ -12,6 +12,7 @@ namespace SAC_Web_Application.Models.ClubModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubID { get; set; }
+        [Display(Name ="Membership Type")]
         public string Item { get; set; }
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Cost { get; set; }

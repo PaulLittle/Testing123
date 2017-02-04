@@ -77,7 +77,7 @@ namespace SAC_Web_Application.Controllers
                     _logger.LogInformation(1, "User logged in.");
                     //return RedirectToLocal(returnUrl);
                     // redirect user to subscriptions page for now
-                    return RedirectToAction(nameof(MembersController.Create), "Members");
+                    return RedirectToAction(nameof(SubscriptionsController.Index), "Subscriptions");
                 }
                 if (result.RequiresTwoFactor)
                 {
