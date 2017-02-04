@@ -1,0 +1,44 @@
+@model IEnumerable<SAC_Web_Application.Models.ClubModel.Subscription>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Select Subscription of your choice below</h3>
+<br />
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Subscription List</strong>
+    </div>
+    <table class="table table-condensed table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                         @Html.DisplayFor(modelItem => item.Item)
+                    </td>
+                    <td>
+                         @Html.DisplayFor(modelItem => item.Cost)
+                    </td>
+                    <td>
+                        <a asp-action="SelectSubscription" asp-route-id="@item.SubID" class="btn btn-success btn-xs">Select Item</a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

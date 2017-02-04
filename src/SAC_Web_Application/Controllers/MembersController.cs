@@ -44,8 +44,14 @@ namespace SAC_Web_Application.Controllers
         }
 
         // GET: Members/Create
-        public IActionResult Create()
+        public IActionResult Create(int? subId)
         {
+            if (subId != null)
+            {
+                var sub = _context.Subscriptions.Where(s => s.SubID == subId).First();
+                ViewData["SubName"] = sub.Item;
+            }
+
             return View();
         }
 
@@ -189,6 +195,12 @@ namespace SAC_Web_Application.Controllers
         private bool MembersExists(int id)
         {
             return _context.Members.Any(e => e.MemberID == id);
+        }
+
+        // GET: Members/Subscriptions
+        public IActionResult Subscriptions()
+        {
+            return View();
         }
     }
 }

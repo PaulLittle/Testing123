@@ -48,10 +48,16 @@ namespace SAC_Web_Application
             var connection = @"Server=tcp:sac-server-object.database.windows.net,1433;Initial Catalog=SAC_database;Persist Security Info=False;User ID=Dave1633;Password=SACpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<ClubContext>(options => options.UseSqlServer(connection));
 
-            // Add framework services.
-            services.AddEntityFramework()
-            .AddDbContext<ApplicationDbContext>(options =>
+            //Add framework services.
+           services.AddEntityFramework()
+           .AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            /*services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ClubContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -74,8 +80,6 @@ namespace SAC_Web_Application
                 options.Filters.Add(new RequireHttpsAttribute());
             });
 
-            services.AddAuthentication(
-                opts => opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,15 +105,6 @@ namespace SAC_Web_Application
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseCookieAuthentication();
-
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
-            {
-                ClientId = Configuration["AzureAd:ClientId"],
-                Authority = string.Format(Configuration["AzureAd:AadInstance"], Configuration["AzureAd:TenantId"]),
-                CallbackPath = Configuration["AzureAd:AuthCallback"]
-            });
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -117,7 +112,7 @@ namespace SAC_Web_Application
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DbContextSeedData.Seed(app);
+            //DbContextSeedData.Seed(app);
 
         }
     }

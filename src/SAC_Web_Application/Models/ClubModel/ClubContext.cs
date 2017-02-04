@@ -22,6 +22,7 @@ namespace SAC_Web_Application.Models.ClubModel
         public DbSet<CoachQualification> CoachQualifications { get; set; }
         public DbSet<Committee> Committees { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

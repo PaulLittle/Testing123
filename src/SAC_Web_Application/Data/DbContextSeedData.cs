@@ -16,7 +16,7 @@ namespace SAC_Web_Application.Data
             using (var context = app.ApplicationServices.GetRequiredService<ClubContext>())
             {
                 //perform seed operations
-                context.Members.Add(new Members
+                /*context.Members.Add(new Members
                 {
                     Address1 = "long road",
                     Address2 = "farm ville",
@@ -37,7 +37,7 @@ namespace SAC_Web_Application.Data
 
                 // Save changes and release resources
                 context.SaveChanges();
-                context.Dispose();
+                context.Dispose();*/
             }
         }
     }
