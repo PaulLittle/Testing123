@@ -113,6 +113,7 @@ namespace SAC_Web_Application
             });
 
             //DbContextSeedData.Seed(app);
+            RolesData.SeedRoles(app.ApplicationServices).Wait();
 
         }
     }
