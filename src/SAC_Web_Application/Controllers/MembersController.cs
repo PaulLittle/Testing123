@@ -65,14 +65,18 @@ namespace SAC_Web_Application.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind
             ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
-            Members members, IServiceProvider serviceProvider)
+            Members members
+            /*, IServiceProvider serviceProvider*/) //for adding to member role
         {
             // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
 
+            //for adding to member role
+            //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
             if (ModelState.IsValid)
             {
-                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                
 
                 members.Email = userEmail;
                 // addional columns that must be added
@@ -81,11 +85,12 @@ namespace SAC_Web_Application.Controllers
 
                 _context.Add(members);
 
-                ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
+                //for adding to member role
+                /*ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
                 if (user1 != null)
                 {
                     await userManager.AddToRolesAsync(user1, new string[] { "Member" });
-                }
+                }*/
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

@@ -15,9 +15,9 @@ namespace SAC_Web_Application.Data
 
         public static async Task SeedRoles(IServiceProvider serviceProvider)
         {
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var db = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            //using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var db = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
                 var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -53,16 +53,11 @@ namespace SAC_Web_Application.Data
                 }
 
                 ApplicationUser user2 = await userManager.FindByEmailAsync("paull1068@gmail.com");
-                if (user1 != null)
+                if (user2 != null)
                 {
                     await userManager.AddToRolesAsync(user2, new string[] { "Admin" });
                 }
-
-
-
-
-
-            }
+            //}
         }
     }
 }
