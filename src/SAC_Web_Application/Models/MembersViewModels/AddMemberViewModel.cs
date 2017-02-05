@@ -19,10 +19,16 @@ namespace SAC_Web_Application.Models.MembersViewModels
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
         public DateTime DOB { get; set; }
+
+        //[Required]
+        //[EmailAddress]
+        //[Display(Name = "Email Address")]
+        //public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

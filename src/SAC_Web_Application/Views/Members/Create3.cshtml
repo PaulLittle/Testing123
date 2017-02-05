@@ -1,8 +1,14 @@
-﻿
-@model SAC_Web_Application.Models.ClubModel.Members
+@model SAC_Web_Application.Models.MembersViewModels.AddMemberViewModel
+
+@{
+    ViewData["Title"] = "Subscriptions";
+}
+
+<h2>Subscription Form</h2>
+<h3>@ViewData["SubName"]</h3>
+<h3>Athlete Details</h3>
 <form asp-action="Create">
-    <div class="form-horizontal">
-        @*<h4>Add Member</h4>*@
+    <div class="form-horizontal">        
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -68,6 +74,7 @@
             </div>
         </div>
         <!--Commented drop down list for now since nothing gets selected-->
+
         <!--<div class="form-group">
             <label asp-for="County" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -211,10 +218,33 @@
                 <span asp-validation-for="TeamName" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-success" />
-            </div>
-        </div>
+        
     </div>
 </form>
+
+<h3>2nd Athlete Details</h3>
+<div class="form-group" id="Member2">
+    @Html.Partial("_Create2nd")
+</div>
+<h3>2nd Athlete Details</h3>
+<div class="form-group" id="Member2">
+    @Html.Partial("_Create2nd")
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Submit" class="btn btn-success" />
+    </div>
+</div>
+
+@*@Html.ActionLink("Add Another Member", "_Create2", "Members", new { @class = "btn btn-primary "})*@
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Index" class="btn btn-xs btn-warning">Member List</a>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

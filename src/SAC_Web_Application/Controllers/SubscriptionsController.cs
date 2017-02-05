@@ -50,7 +50,18 @@ namespace SAC_Web_Application.Controllers
         // GET: Subscriptions/Select Subscription
         public IActionResult SelectSubscription(int? id)
         {
-            return RedirectToAction("Create", "Members", new { subId = id });
+            switch (id)
+            {
+                case 4:
+                    return RedirectToAction("Create2", "Members", new { subId = id });
+                    break;
+                case 5:
+                    return RedirectToAction("Create3", "Members", new { subId = id });
+                    break;
+                default:
+                    return RedirectToAction("Create", "Members", new { subId = id });
+                    break;
+            }
         }
 
         // POST: Subscriptions/Create
