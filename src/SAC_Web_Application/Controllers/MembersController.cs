@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SAC_Web_Application.Models.ClubModel;
 using System.Security.Claims;
+using SAC_Web_Application.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 
 //Members Controller
 namespace SAC_Web_Application.Controllers
@@ -60,19 +63,30 @@ namespace SAC_Web_Application.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")] Members members)
+        public async Task<IActionResult> Create([Bind
+            ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
+            Members members, IServiceProvider serviceProvider)
         {
-            // GETS THE EMAI ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
+            // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
 
             if (ModelState.IsValid)
             {
+                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
                 members.Email = userEmail;
                 // addional columns that must be added
                 members.MembershipPaid = false;
                 members.DateRegistered = DateTime.Now;
 
                 _context.Add(members);
+
+                ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
+                if (user1 != null)
+                {
+                    await userManager.AddToRolesAsync(user1, new string[] { "Member" });
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
 

@@ -30,6 +30,20 @@ namespace SAC_Web_Application.Data
                     await roleManager.CreateAsync(new IdentityRole("Admin"));
                 }
 
+                if(!await roleManager.RoleExistsAsync("Member"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("Member"));
+                }
+
+                if (!await roleManager.RoleExistsAsync("RegisteredUser"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
+                }
+
+                if (!await roleManager.RoleExistsAsync("Coach"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("Coach"));
+                }
                 // assign roles to users
 
                 ApplicationUser user1 = await userManager.FindByEmailAsync("Dave1633@live.com");
