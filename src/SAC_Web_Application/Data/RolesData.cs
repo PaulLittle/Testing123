@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SAC_Web_Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,30 @@ namespace SAC_Web_Application.Data
 
                 var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                // create user roles
+
                 if (!await roleManager.RoleExistsAsync("Admin"))
                 {
                     await roleManager.CreateAsync(new IdentityRole("Admin"));
                 }
 
-                // not sure how to assign a role yet
+                // assign roles to users
+
+                ApplicationUser user1 = await userManager.FindByEmailAsync("Dave1633@live.com");
+                if (user1 != null)
+                {
+                    await userManager.AddToRolesAsync(user1, new string[] { "Admin" });
+                }
+
+                ApplicationUser user2 = await userManager.FindByEmailAsync("paull1068@gmail.com");
+                if (user1 != null)
+                {
+                    await userManager.AddToRolesAsync(user2, new string[] { "Admin" });
+                }
+
+
 
 
 

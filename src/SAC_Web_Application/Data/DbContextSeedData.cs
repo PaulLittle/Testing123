@@ -15,8 +15,6 @@ namespace SAC_Web_Application.Data
 {
     public static class DbContextSeedData
     {
-        static private readonly UserManager<ApplicationUser> _userManager;
-        static private readonly RoleManager<ApplicationUser> _roleManager;
         public static void Seed(IApplicationBuilder app)
         {
             // Get an instance of the DbContext from the DI container
@@ -47,26 +45,7 @@ namespace SAC_Web_Application.Data
                 context.Dispose();*/
             }
 
-            using (var context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>())
-            {
-                // Create user roles
-
-                ApplicationUser user1 = context.Users.Where(a => a.Email == "dave1633@live.com").First();
-                ApplicationUser user2 = context.Users.Where(a => a.Email == "paull1068@gmail.com").First();
-
-                var adminRole = _roleManager.FindByNameAsync("Admin");
-
-                if (adminRole == null)
-                {
-                    //_roleManager.CreateAsync(new IdentityRole("Admin"))
-                    
-                }
-
-                /*var userClaims = new List<Claim> { new Claim("Admin", user1.Email), new Claim("Admin", user2.Email) };
-                var principal = new ClaimsPrincipal(new ClaimsIdentity(userClaims, user1.Email));
-                HttpContext SignInAsync("app", principal);*/
-            }
-        
+            
         }
     }
 }
