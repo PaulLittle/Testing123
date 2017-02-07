@@ -218,13 +218,60 @@
                 <span asp-validation-for="TeamName" class="text-danger" />
             </div>
         </div>
+
+        @*<div class="form-inline" id="ClubMembers">
+            @Html.Action(actionName: "_ClubMembers",
+                    controllerName: "Members", routeValues: new { id = Model.ClubId })
+        </div>*@
+
+        @if ((int)(ViewData["SubID"]) == 4 || (int)(ViewData["SubID"]) == 7 || (int)(ViewData["SubID"]) == 12)
+        {
+            <h3>Athlete 2</h3>
+            <div class="form-group" id="Member2">
+                @Html.Partial("_Create")
+            </div>
+        }
+        @if ((int)(ViewData["SubID"]) == 5 || (int)(ViewData["SubID"]) == 8 || (int)(ViewData["SubID"]) == 10)
+        {
+            <h3>Athlete 2</h3>
+            <div class="form-group" id="Member2">
+                @Html.Partial("_Create")
+            </div>
+
+            <h3>Athlete 3</h3>
+            <div class="form-group" id="Member3">
+                @Html.Partial("_Create")
+            </div>
+        }
+
+        @if ((int)(ViewData["SubID"]) == 6 || (int)(ViewData["SubID"]) == 9 || (int)(ViewData["SubID"]) == 11)
+        {
+            <h3>Athlete 2</h3>
+            <div class="form-group" id="Member2">
+                @Html.Partial("_Create")
+            </div>
+
+            <h3>Athlete 3</h3>
+            <div class="form-group" id="Member3">
+                @Html.Partial("_Create")
+            </div>
+
+            <h3>Athlete 4</h3>
+            <div class="form-group" id="Member4">
+                @Html.Partial("_Create")
+            </div>
+        }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Submit" class="btn btn-success" />
             </div>
         </div>
+        
     </div>
 </form>
+
+
 
 
 @*@Html.ActionLink("Add Another Member", "_Create2", "Members", new { @class = "btn btn-primary "})*@

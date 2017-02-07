@@ -53,6 +53,7 @@ namespace SAC_Web_Application.Controllers
             {
                 var sub = _context.Subscriptions.Where(s => s.SubID == subId).First();
                 ViewData["SubName"] = sub.Item;
+                ViewData["SubID"] = sub.SubID;
             }
 
             return View();
@@ -76,8 +77,6 @@ namespace SAC_Web_Application.Controllers
 
             if (ModelState.IsValid)
             {
-                
-
                 members.Email = userEmail;
                 // addional columns that must be added
                 members.MembershipPaid = false;
@@ -101,61 +100,51 @@ namespace SAC_Web_Application.Controllers
             return View(members);
         }
 
-        public IActionResult Create2()
+        public PartialViewResult _Create([Bind
+            ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
+            Members member1
+            /*, IServiceProvider serviceProvider*/)
         {
-            return View();
+            return PartialView(new Members()
+            {
+                Address1 = member1.Address1,
+                Address2 = member1.Address2,
+                PostCode = member1.PostCode,
+                County = member1.County,
+                City = member1.City,
+                Province = member1.Province
+            });
         }
 
-        // POST: Members/Create2
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create2([Bind("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")] Members members)
+        public async Task<IActionResult> _Create1([Bind
+            ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
+            Members members
+            /*, IServiceProvider serviceProvider*/) //for adding to member role
         {
-            // GETS THE EMAI ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
+            // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
+
+            //for adding to member role
+            //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             if (ModelState.IsValid)
             {
+
+
                 members.Email = userEmail;
                 // addional columns that must be added
                 members.MembershipPaid = false;
                 members.DateRegistered = DateTime.Now;
 
                 _context.Add(members);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
 
-            }
+                //for adding to member role
+                /*ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
+                if (user1 != null)
+                {
+                    await userManager.AddToRolesAsync(user1, new string[] { "Member" });
+                }*/
 
-            // If we got this far, something failed, redisplay form
-            return View(members);
-        }
-
-        public IActionResult Create3()
-        {
-            return View();
-        }
-
-        // POST: Members/Create2
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create3([Bind("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")] Members members)
-        {
-            // GETS THE EMAI ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
-            var userEmail = User.FindFirstValue(ClaimTypes.Name);
-
-            if (ModelState.IsValid)
-            {
-                members.Email = userEmail;
-                // addional columns that must be added
-                members.MembershipPaid = false;
-                members.DateRegistered = DateTime.Now;
-
-                _context.Add(members);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
 

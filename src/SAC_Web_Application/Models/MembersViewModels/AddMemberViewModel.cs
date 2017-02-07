@@ -25,10 +25,10 @@ namespace SAC_Web_Application.Models.MembersViewModels
         [Display(Name = "Date Of Birth")]
         public DateTime DOB { get; set; }
 
-        //[Required]
-        //[EmailAddress]
-        //[Display(Name = "Email Address")]
-        //public string Email { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
