@@ -100,6 +100,8 @@ namespace SAC_Web_Application.Controllers
             return View(members);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public PartialViewResult _Create([Bind
             ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
             Members member1
@@ -114,45 +116,7 @@ namespace SAC_Web_Application.Controllers
                 City = member1.City,
                 Province = member1.Province
             });
-        }
-
-        public async Task<IActionResult> _Create1([Bind
-            ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
-            Members members
-            /*, IServiceProvider serviceProvider*/) //for adding to member role
-        {
-            // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
-            var userEmail = User.FindFirstValue(ClaimTypes.Name);
-
-            //for adding to member role
-            //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-            if (ModelState.IsValid)
-            {
-
-
-                members.Email = userEmail;
-                // addional columns that must be added
-                members.MembershipPaid = false;
-                members.DateRegistered = DateTime.Now;
-
-                _context.Add(members);
-
-                //for adding to member role
-                /*ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
-                if (user1 != null)
-                {
-                    await userManager.AddToRolesAsync(user1, new string[] { "Member" });
-                }*/
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(members);
-        }
+        }        
 
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)

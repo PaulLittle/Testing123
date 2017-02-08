@@ -2,12 +2,15 @@
 
 @{
     ViewData["Title"] = "Subscriptions";
+
+    int subID = (int)(ViewData["SubID"]);
 }
 
 <h2>Subscription Form</h2>
 <h3>@ViewData["SubName"]</h3>
 <h3>Athlete Details</h3>
 <form asp-action="Create">
+    
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -224,14 +227,14 @@
                     controllerName: "Members", routeValues: new { id = Model.ClubId })
         </div>*@
 
-        @if ((int)(ViewData["SubID"]) == 4 || (int)(ViewData["SubID"]) == 7 || (int)(ViewData["SubID"]) == 12)
+        @if (subID == 4 || subID == 7 || subID == 12)
         {
             <h3>Athlete 2</h3>
             <div class="form-group" id="Member2">
                 @Html.Partial("_Create")
             </div>
         }
-        @if ((int)(ViewData["SubID"]) == 5 || (int)(ViewData["SubID"]) == 8 || (int)(ViewData["SubID"]) == 10)
+        @if (subID == 5 || subID == 8 || subID == 10)
         {
             <h3>Athlete 2</h3>
             <div class="form-group" id="Member2">
@@ -244,7 +247,7 @@
             </div>
         }
 
-        @if ((int)(ViewData["SubID"]) == 6 || (int)(ViewData["SubID"]) == 9 || (int)(ViewData["SubID"]) == 11)
+        @if (subID == 6 || subID == 9 || subID == 11)
         {
             <h3>Athlete 2</h3>
             <div class="form-group" id="Member2">
