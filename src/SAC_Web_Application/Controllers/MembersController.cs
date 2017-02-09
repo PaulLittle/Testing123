@@ -64,14 +64,22 @@ namespace SAC_Web_Application.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind
-            ("MemberID,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
+        public async Task<IActionResult> Create([Bind("MemberID,Identifier,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
             Members members
             /*, IServiceProvider serviceProvider*/) //for adding to member role
         {
             // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
-
+            int subNum = members.Identifier;
+            int viewCount;
+            
+            if (subNum == 4 || subNum == 7 || subNum == 12)
+                viewCount = 1;
+            else if (subNum == 5 || subNum == 8 || subNum == 10)
+                viewCount = 2;
+            else if (subNum == 6 || subNum == 9 || subNum == 11)
+                viewCount = 3;
+            else viewCount = 0;
             //for adding to member role
             //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -92,7 +100,75 @@ namespace SAC_Web_Application.Controllers
                 }*/
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (viewCount == 0)
+                    return RedirectToAction("Index");
+                else
+                    viewCount--;
+                    return RedirectToAction("Create2", "Members", new { subId = subNum, viewCount = viewCount });
+
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(members);
+        }
+
+        // GET: Members/Create2
+        public IActionResult Create2(int? subId, int viewCount)
+        {
+            if (subId != null)
+            {
+                var sub = _context.Subscriptions.Where(s => s.SubID == subId).First();
+                ViewData["SubName"] = sub.Item;
+                ViewData["SubID"] = sub.SubID;
+                //ViewData["viewCount"] = viewCount;
+            }
+
+            return View();
+        }
+
+        // POST: Members/Create2
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create2([Bind("MemberID,Identifier,Address1,Address2,City,County,CountyOfBirth,DOB,DateRegistered,Email,FirstName,Gender,LastName,MembershipPaid,PhoneNumber,PostCode,Province,TeamName")]
+            Members members
+            /*, IServiceProvider serviceProvider*/) //for adding to member role
+        {
+            // GETS THE EMAIL ADDRESS OF THE USER THAT IS CURRENTLY LOGGED IN
+            //var userEmail = User.FindFirstValue(ClaimTypes.Name);
+            int subNum = members.Identifier;
+            int viewCount;
+
+            if (subNum == 5 || subNum == 8 || subNum == 10)
+                viewCount = 1;
+            else if (subNum == 6 || subNum == 9 || subNum == 11)
+                viewCount = 2;
+            else viewCount = 0;
+            //for adding to member role
+            //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (ModelState.IsValid)
+            {
+                //members.Email = userEmail;
+                // addional columns that must be added
+                members.MembershipPaid = false;
+                members.DateRegistered = DateTime.Now;
+
+                _context.Add(members);
+
+                //for adding to member role
+                /*ApplicationUser user1 = await userManager.FindByEmailAsync(userEmail);
+                if (user1 != null)
+                {
+                    await userManager.AddToRolesAsync(user1, new string[] { "Member" });
+                }*/
+
+                await _context.SaveChangesAsync();
+                if (viewCount == 0)
+                    return RedirectToAction("Index");
+                else
+                    return RedirectToAction("Create3", "Members", new { subId = subNum, viewCount = viewCount });
 
             }
 
